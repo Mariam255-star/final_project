@@ -7,12 +7,12 @@ class HairCareScreen extends StatelessWidget {
 
   // ✅ قائمة مسارات صور المنتجات
   final List<String> productImages = const [
-    'assets/medicines/shampoo.png',
-    'assets/medicines/hair_mask.png',
-    'assets/medicines/balsam.png',
-    'assets/medicines/serum.png',
-    'assets/medicines/oil.png',
-    'assets/medicines/cream.png',
+    'assets/medicines/cream_1.png',
+    'assets/medicines/cream_2.jpg',
+    'assets/medicines/cream_3.jpg',
+    'assets/medicines/cream_4.jpg',
+    'assets/medicines/download (7).jpg',
+    'assets/medicines/skincare.png',
   ];
 
   @override

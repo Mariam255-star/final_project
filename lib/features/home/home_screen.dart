@@ -58,29 +58,36 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  height: 50,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: AppColor.whiteColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Upload your Prescription",
-                          style: TextStyles.body(color: Colors.grey),
-                        ),
-                      ),
-                      Image.asset(
-                        'assets/images/uploadprecipes.png',
-                        width: 24,
-                        height: 24,
-                      ),
-                    ],
-                  ),
-                ),
+                InkWell(
+  borderRadius: BorderRadius.circular(30),
+  onTap: () {
+    context.push('/scan-prescription');
+  },
+  child: Container(
+    height: 50,
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    decoration: BoxDecoration(
+      color: AppColor.whiteColor,
+      borderRadius: BorderRadius.circular(30),
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            "Upload your Prescription",
+            style: TextStyles.body(color: Colors.grey),
+          ),
+        ),
+        Image.asset(
+          'assets/images/uploadprecipes.png',
+          width: 24,
+          height: 24,
+        ),
+      ],
+    ),
+  ),
+),
+
               ],
             ),
           ),

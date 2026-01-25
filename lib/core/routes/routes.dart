@@ -5,11 +5,14 @@ import 'package:final_project/features/home/categories/hair_care_screen.dart';
 import 'package:final_project/features/home/categories/pharma_screen.dart';
 import 'package:final_project/features/home/categories/skin_care_screen.dart';
 import 'package:final_project/features/home/home_screen.dart';
+import 'package:final_project/features/home/prescription/scan_prescription_screen.dart';
 import 'package:final_project/features/profile/edit_profile_page.dart';
 import 'package:final_project/features/profile/my_profile_page.dart';
 import 'package:final_project/features/profile/profile_page.dart';
 import 'package:final_project/features/welcome/welcome_screen.dart';
 import 'package:final_project/features/splash/splashscreen.dart';
+
+
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -73,6 +76,10 @@ GoRoute(
       path: '/edit-profile',
       builder: (context, state) => const EditProfilePage(),
     ),
+    GoRoute(
+  path: '/scan-prescription',
+  builder: (context, state) => const ScanPrescriptionScreen(),
+),
 
   ],
 );

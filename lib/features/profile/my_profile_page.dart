@@ -19,10 +19,7 @@ class MyProfilePage extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {},
-          )
+          IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
         ],
       ),
 
@@ -65,9 +62,7 @@ class MyProfilePage extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xff7ADCC0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       child: Text(text),
     );
@@ -78,9 +73,7 @@ class MyProfilePage extends StatelessWidget {
       leading: Icon(icon, color: isLogout ? Colors.red : Colors.green),
       title: Text(
         title,
-        style: TextStyles.body(
-          color: isLogout ? Colors.red : Colors.black,
-        ),
+        style: TextStyles.body(color: isLogout ? Colors.red : Colors.black),
       ),
     );
   }

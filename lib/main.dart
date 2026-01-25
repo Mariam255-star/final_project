@@ -1,7 +1,6 @@
 import 'package:final_project/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: appRouter, 
+      routerConfig: appRouter,
     );
   }
 }

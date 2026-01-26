@@ -1,6 +1,7 @@
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SkinCareScreen extends StatelessWidget {
   const SkinCareScreen({super.key});
@@ -61,27 +62,33 @@ class SkinCareScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: productImages.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      leading: Image.asset(
-                        productImages[index],
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.contain,
+                  return GestureDetector(
+                    onTap: () {
+                      context.go('/product-details');
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      title: Text(
-                        'Skin Product',
-                        style: TextStyles.bodyLarge(
-                          color: AppColor.secondaryColor,
+                      child: ListTile(
+                        leading: Image.asset(
+                          productImages[index],
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.contain,
                         ),
-                      ),
-                      subtitle: Text(
-                        '4.6 ⭐ (320 Reviews)',
-                        style: TextStyles.caption(color: Colors.grey),
+                        title: Text(
+                          'Skin Product',
+                          style: TextStyles.bodyLarge(
+                            color: AppColor.secondaryColor,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '4.6 ⭐ (320 Reviews)',
+                          style:
+                              TextStyles.caption(color: Colors.grey),
+                        ),
                       ),
                     ),
                   );
@@ -92,18 +99,28 @@ class SkinCareScreen extends StatelessWidget {
         ),
       ),
 
-      /// 🟢 Bottom Navigation Bar (نفس اللي في HairCare)
+      /// 🟢 Bottom Navigation Bar
       bottomNavigationBar: Container(
         height: 70,
         color: AppColor.primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _navItem('assets/images/Home_Fill.png'),
+            GestureDetector(
+              onTap: () {
+                context.go('/home');
+              },
+              child: _navItem('assets/images/Home_Fill.png'),
+            ),
             _navItem('assets/images/Discover.png'),
             _navItem('assets/images/Cart.png'),
             _navItem('assets/images/Bell.png'),
-            _navItem('assets/images/Person.png'),
+            GestureDetector(
+              onTap: () {
+                context.go('/profile');
+              },
+              child: _navItem('assets/images/Person.png'),
+            ),
           ],
         ),
       ),

@@ -33,35 +33,33 @@ class CustomBottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Home_Fill.png'),
-            color: Colors.white,
+          
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Discover.png'),
-            color: Colors.white,
+            
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Cart.png'),
-            color: Colors.white,
+
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Bell.png'),
-            color: Colors.white,
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Person.png'),
-            color: Colors.white,
           ),
           label: '',
         ),

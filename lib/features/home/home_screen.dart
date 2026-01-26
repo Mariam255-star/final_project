@@ -280,6 +280,16 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           _currentIndex = index;
         });
+        if (index == 0) {
+          context.push('/home');
+        } else if (index == 1) {
+          context.push('/address');
+        } else if (index == 2) {
+          context.push('/cart');
+        }
+        // } else if (index == 3) {
+        //   context.push('/notifications');
+        // } else
 
         if (index == 4) {
           context.push('/profile');

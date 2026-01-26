@@ -16,7 +16,8 @@ class AddressScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(),
+          onPressed: () => context.go('/checkout'),
+
         ),
         title: Text(
           'Address',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 class HairCareScreen extends StatelessWidget {
   const HairCareScreen({super.key});
@@ -110,7 +111,13 @@ class HairCareScreen extends StatelessWidget {
                         childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
-                        return _productGridItem(productImages[index]);
+                        // return _productGridItem(productImages[index]);
+                         return GestureDetector(
+    onTap: () {
+      context.go('/product-details');
+    },
+    child: _productGridItem(productImages[index]),
+  );
                       },
                     ),
                   ),
@@ -128,11 +135,23 @@ class HairCareScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _navItem('assets/images/Home_Fill.png'),
+            // _navItem('assets/images/Home_Fill.png'),
+            GestureDetector(
+        onTap: () { 
+          context.go('/home');
+        },
+        child: _navItem('assets/images/Home_Fill.png'),
+      ),
             _navItem('assets/images/Discover.png'),
             _navItem('assets/images/Cart.png'),
             _navItem('assets/images/Bell.png'),
-            _navItem('assets/images/Person.png'),
+            // _navItem('assets/images/Person.png'),
+                  GestureDetector(
+        onTap: () {
+          context.go('/profile');
+        },
+        child: _navItem('assets/images/Person.png'),
+      ),
           ],
         ),
       ),

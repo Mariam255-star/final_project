@@ -1,6 +1,8 @@
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:final_project/core/routes/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class PharmaScreen extends StatelessWidget {
   const PharmaScreen({super.key});
@@ -107,11 +109,22 @@ class PharmaScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _navItem('assets/images/Home_Fill.png'),
+            GestureDetector(
+        onTap: () {
+          context.go('/home');
+        },  
+        child: _navItem('assets/images/Home_Fill.png'),
+      ),
             _navItem('assets/images/Discover.png'),
             _navItem('assets/images/Cart.png'),
             _navItem('assets/images/Bell.png'),
-            _navItem('assets/images/Person.png'),
+            // _navItem('assets/images/Person.png'),
+             GestureDetector(
+        onTap: () {
+          context.go('/profile');
+        },
+        child: _navItem('assets/images/Person.png'),
+      ),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_color.dart';
 import '../../../core/utils/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
@@ -11,10 +12,16 @@ class ProductDetailsScreen extends StatelessWidget {
       backgroundColor: AppColor.whiteColor,
 
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
+  backgroundColor: Colors.transparent,
+  elevation: 0,
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back, color: Colors.black),
+    onPressed: () {
+      context.go('/prescription-items');
+    },
+  ),
+),
+
 
       body: Padding(
         padding: const EdgeInsets.all(16),

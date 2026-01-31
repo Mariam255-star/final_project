@@ -9,8 +9,10 @@ class MyProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.whiteColor,
+
       appBar: AppBar(
-        title: const Text('my profile'),
+        title: const Text('My Profile'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -50,7 +52,7 @@ class MyProfilePage extends StatelessWidget {
             const SizedBox(height: 30),
 
             _profileItem('Favourites', Icons.favorite),
-            _profileItem('save in your bag', Icons.download),
+            _profileItem('Save in your bag', Icons.download),
             const Divider(),
             _profileItem('Location', Icons.location_on),
             _profileItem('Logout', Icons.logout, isLogout: true),

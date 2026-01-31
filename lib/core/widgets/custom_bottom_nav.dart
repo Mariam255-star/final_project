@@ -3,26 +3,36 @@ import 'package:go_router/go_router.dart';
 import '../../core/constants/app_color.dart';
 
 class CustomBottomNav extends StatelessWidget {
-  const CustomBottomNav({super.key});
+  final int currentIndex;
+
+  const CustomBottomNav({
+    super.key,
+    required this.currentIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: currentIndex,
       backgroundColor: AppColor.primaryColor,
       type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white70,
       onTap: (index) {
+        if (index == currentIndex) return;
+
         switch (index) {
           case 0:
             context.go('/home');
             break;
           case 1:
-            // Discover (لسه فاضية أو Categories)
+              context.go('/our-pharm');
             break;
           case 2:
-            context.go('/cart'); // 🛒 Cart Items
+            context.go('/cart');
             break;
           case 3:
-            // Notifications
+            context.go('/notifications');
             break;
           case 4:
             context.go('/profile');
@@ -33,21 +43,18 @@ class CustomBottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Home_Fill.png'),
-          
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Discover.png'),
-            
           ),
           label: '',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
             AssetImage('assets/images/Cart.png'),
-
           ),
           label: '',
         ),

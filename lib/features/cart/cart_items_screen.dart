@@ -1,3 +1,4 @@
+import 'package:final_project/core/shared/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_color.dart';
@@ -8,51 +9,54 @@ class CartItemsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.whiteColor,
-
-      appBar: AppBar(
+    return MainLayout(
+      currentIndex: 2, // BottomNav index
+      child: Scaffold(
         backgroundColor: AppColor.whiteColor,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () =>  context.go('/product-details'),
-        ),
-        title: Text(
-          'card items',
-          style: TextStyles.subtitle(color: Colors.black),
-        ),
-        centerTitle: true,
-      ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            _headerRow(),
-            const SizedBox(height: 12),
+        appBar: AppBar(
+          backgroundColor: AppColor.whiteColor,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => context.go('/product-details'),
+          ),
+          title: Text(
+            'Cart Items',
+            style: TextStyles.subtitle(color: Colors.black),
+          ),
+          centerTitle: true,
+        ),
 
-            Expanded(
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return _cartItem();
-                },
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              _headerRow(),
+              const SizedBox(height: 12),
+
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return _cartItem();
+                  },
+                ),
               ),
-            ),
 
-            _summaryRow('Subtotal (2)', '\$19.98'),
-            _summaryRow('Shipping total', 'Free'),
-            _summaryRow('Taxes', '\$2.00'),
-            _summaryRow('Total', '\$21.98', bold: true),
+              _summaryRow('Subtotal (2)', '\$19.98'),
+              _summaryRow('Shipping total', 'Free'),
+              _summaryRow('Taxes', '\$2.00'),
+              _summaryRow('Total', '\$21.98', bold: true),
 
-            const SizedBox(height: 12),
+              const SizedBox(height: 12),
 
-            _greenButton(
-              title: 'Checkout',
-              onTap: () => context.go('/checkout'),
-            ),
-          ],
+              _greenButton(
+                title: 'Checkout',
+                onTap: () => context.go('/checkout'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -107,7 +111,9 @@ class CartItemsScreen extends StatelessWidget {
           Text(title),
           Text(
             value,
-            style: TextStyle(fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+            style: TextStyle(
+              fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
         ],
       ),
@@ -115,8 +121,9 @@ class CartItemsScreen extends StatelessWidget {
   }
 
   Widget _greenButton({required String title, required VoidCallback onTap}) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         height: 50,
         width: double.infinity,

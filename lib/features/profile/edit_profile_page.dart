@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:final_project/core/utils/text_style.dart';
+import 'package:final_project/core/constants/app_color.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -8,18 +9,20 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.whiteColor,
+
       appBar: AppBar(
-        title: const Text('Edit your profile'),
+        title: const Text('Edit Profile'),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => context.pop(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.check_circle),
+            icon: const Icon(Icons.check_circle, color: Colors.green),
             onPressed: () {},
           )
         ],
@@ -30,6 +33,7 @@ class EditProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// 🟢 Profile Image
             Center(
               child: Stack(
                 children: [
@@ -42,8 +46,12 @@ class EditProfilePage extends StatelessWidget {
                     right: 0,
                     child: CircleAvatar(
                       radius: 16,
-                      backgroundColor: Colors.green,
-                      child: const Icon(Icons.add, size: 18, color: Colors.white),
+                      backgroundColor: AppColor.primaryColor,
+                      child: const Icon(
+                        Icons.camera_alt,
+                        size: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -51,13 +59,19 @@ class EditProfilePage extends StatelessWidget {
             ),
 
             const SizedBox(height: 30),
-            Text('Your info', style: TextStyles.titleSmall()),
+
+            /// 🟢 Title
+            Text(
+              'Your Info',
+              style: TextStyles.titleSmall(),
+            ),
 
             const SizedBox(height: 12),
+
             _textField('Name'),
             _textField('Second Name'),
             _textField('Phone Number'),
-            _textField('Gmail'),
+            _textField('Email'),
           ],
         ),
       ),
@@ -70,8 +84,12 @@ class EditProfilePage extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: hint,
+          hintStyle: TextStyles.caption(color: Colors.grey),
+          filled: true,
+          fillColor: const Color(0xffF7F7F7),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
           ),
         ),
       ),

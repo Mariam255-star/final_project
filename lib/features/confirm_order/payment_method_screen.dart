@@ -1,3 +1,4 @@
+import 'package:final_project/core/shared/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_color.dart';
@@ -17,53 +18,71 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.whiteColor,
-
-      appBar: AppBar(
+    return MainLayout(
+      currentIndex: 2, // 🟢 عدلي الرقم حسب ترتيب bottom nav عندك
+      child: Scaffold(
         backgroundColor: AppColor.whiteColor,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(),
+
+        /// 🟢 AppBar
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => context.pop(),
+          ),
+          title: Text(
+            'Payment Method',
+            style: TextStyles.subtitle(color: Colors.black),
+          ),
+          centerTitle: true,
         ),
-        title: Text(
-          'Payment method',
-          style: TextStyles.subtitle(color: Colors.black),
-        ),
-        centerTitle: true,
-      ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            _stepper(),
-            const SizedBox(height: 24),
+        /// 🟢 Body
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              _stepper(),
+              const SizedBox(height: 28),
 
-            _radioTile('Pay Pal', PaymentType.paypal),
-            _radioTile('Pay with Card', PaymentType.card),
+              _paymentTile(
+                title: 'PayPal',
+                icon: Icons.account_balance_wallet,
+                value: PaymentType.paypal,
+              ),
 
-            if (selected == PaymentType.card) _cardForm(),
+              _paymentTile(
+                title: 'Credit / Debit Card',
+                icon: Icons.credit_card,
+                value: PaymentType.card,
+              ),
 
-            _radioTile('Cash on delivery', PaymentType.cash),
+              if (selected == PaymentType.card) _cardForm(),
 
-            const SizedBox(height: 20),
-            _summary(),
+              _paymentTile(
+                title: 'Cash on Delivery',
+                icon: Icons.money,
+                value: PaymentType.cash,
+              ),
 
-            const Spacer(),
+              const SizedBox(height: 22),
+              _summary(),
 
-            GestureDetector(
-              onTap: () => context.push('/order-review'), // ✅ FIXED
-              child: _primaryButton('Next'),
-            ),
-          ],
+              const Spacer(),
+
+              GestureDetector(
+                onTap: () => context.push('/order-review'),
+                child: _primaryButton('Continue'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // ---------- Widgets ----------
+  // ================= Stepper =================
 
   Widget _stepper() {
     return Row(
@@ -79,21 +98,64 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     );
   }
 
-  Widget _radioTile(String title, PaymentType value) {
-    return RadioListTile<PaymentType>(
-      contentPadding: EdgeInsets.zero,
-      title: Text(title),
-      value: value,
-      groupValue: selected,
-      onChanged: (val) => setState(() => selected = val!),
+  // ================= Payment Tile =================
+
+  Widget _paymentTile({
+    required String title,
+    required IconData icon,
+    required PaymentType value,
+  }) {
+    final bool isSelected = selected == value;
+
+    return GestureDetector(
+      onTap: () => setState(() => selected = value),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColor.primaryColor.withOpacity(0.15)
+              : const Color(0xffF6F6F6),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: isSelected ? AppColor.primaryColor : Colors.transparent,
+            width: 1.5,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? AppColor.primaryColor : Colors.grey,
+              size: 28,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: TextStyles.body(
+                color: isSelected ? AppColor.primaryColor : Colors.black,
+              ),
+            ),
+            const Spacer(),
+            Radio<PaymentType>(
+              value: value,
+              groupValue: selected,
+              activeColor: AppColor.primaryColor,
+              onChanged: (val) => setState(() => selected = val!),
+            ),
+          ],
+        ),
+      ),
     );
   }
+
+  // ================= Card Form =================
 
   Widget _cardForm() {
     return Column(
       children: [
-        _textField('John Doe'),
-        _textField('1234 4566 5567 4563'),
+        _textField('Card Holder Name'),
+        _textField('Card Number'),
         Row(
           children: [
             Expanded(child: _textField('MM/YY')),
@@ -104,7 +166,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         CheckboxListTile(
           value: true,
           onChanged: (_) {},
-          title: const Text('Save card details for later'),
+          title: Text(
+            'Save card details',
+            style: TextStyles.caption(),
+          ),
+          activeColor: AppColor.primaryColor,
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
         ),
@@ -112,16 +178,27 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     );
   }
 
+  // ================= Summary =================
+
   Widget _summary() {
-    return Column(
-      children: const [
-        _SummaryRow(title: 'Items value', value: '\$89.99'),
-        _SummaryRow(title: 'Shipment', value: '\$1.99'),
-        Divider(),
-        _SummaryRow(title: 'Total value', value: '\$91.98'),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xffF6F6F6),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        children: const [
+          _SummaryRow(title: 'Items value', value: '\$89.99'),
+          _SummaryRow(title: 'Shipment', value: '\$1.99'),
+          Divider(),
+          _SummaryRow(title: 'Total value', value: '\$91.98'),
+        ],
+      ),
     );
   }
+
+  // ================= UI Helpers =================
 
   Widget _textField(String hint) {
     return Padding(
@@ -129,8 +206,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       child: TextField(
         decoration: InputDecoration(
           hintText: hint,
+          hintStyle: TextStyles.caption(color: Colors.grey),
+          filled: true,
+          fillColor: const Color(0xffF6F6F6),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
           ),
         ),
       ),
@@ -139,15 +220,15 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   Widget _primaryButton(String title) {
     return Container(
-      height: 50,
+      height: 55,
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.primaryColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
         child: Text(
-          title.toLowerCase(),
+          title,
           style: TextStyles.button(color: Colors.white),
         ),
       ),
@@ -173,11 +254,12 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       );
 
   Widget _line() => Expanded(
-        child: Container(height: 1, color: Colors.grey),
+        child: Container(height: 1.2, color: Colors.grey),
       );
 }
 
-// ---------- Summary Row ----------
+// ================= Summary Row =================
+
 class _SummaryRow extends StatelessWidget {
   final String title;
   final String value;
@@ -191,8 +273,8 @@ class _SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title),
-          Text(value),
+          Text(title, style: TextStyles.body()),
+          Text(value, style: TextStyles.body()),
         ],
       ),
     );

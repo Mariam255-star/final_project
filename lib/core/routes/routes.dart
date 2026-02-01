@@ -1,16 +1,18 @@
 import 'package:final_project/features/auth/forgetpassword_screen.dart';
 import 'package:final_project/features/auth/login_screen.dart';
 import 'package:final_project/features/auth/register_screen.dart';
+import 'package:final_project/features/cart/cart_items_screen.dart';
 import 'package:final_project/features/home/categories/hair_care_screen.dart';
 import 'package:final_project/features/home/categories/pharma_screen.dart';
 import 'package:final_project/features/home/categories/skin_care_screen.dart';
 import 'package:final_project/features/home/home_screen.dart';
 import 'package:final_project/features/home/prescription/scan_prescription_screen.dart';
+import 'package:final_project/features/notification/notification_screen.dart';
 import 'package:final_project/features/profile/edit_profile_page.dart';
 import 'package:final_project/features/profile/my_profile_page.dart';
 import 'package:final_project/features/profile/profile_page.dart';
-import 'package:final_project/features/welcome/welcome_screen.dart';
 import 'package:final_project/features/splash/splashscreen.dart';
+import 'package:final_project/features/welcome/welcome_screen.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -20,7 +22,7 @@ final GoRouter appRouter = GoRouter(
     /// 🔹 Splash
     GoRoute(path: '/', builder: (context, state) => const Splashscreen()),
 
-    /// 🔹 Welcome
+    /// 🟢 Welcome
     GoRoute(
       path: '/welcome',
       builder: (context, state) => const WelcomeScreen(),
@@ -52,19 +54,36 @@ final GoRouter appRouter = GoRouter(
       path: '/skin-care',
       builder: (context, state) => const SkinCareScreen(),
     ),
+
+    /// 🛒 Cart
+    GoRoute(
+      path: '/cart',
+      builder: (context, state) => const CartItemsScreen(),
+    ),
+
+    /// 🔔 Notifications
+    GoRoute(
+      path: '/notifications',
+      builder: (context, state) => const NotificationScreen(),
+    ),
+
+    /// 👤 Profile
     GoRoute(
       path: '/profile',
       builder: (context, state) => const MyProfilePage(),
     ),
 
-    // GoRoute(
-    //   path: '/my-profile',
-    //   builder: (context, state) => const MyProfilePage(),
-    // ),
+    // GoRoute(path: '/profile', builder: (context, state) => const ProfilePage()),
+    GoRoute(
+      path: '/my-profile',
+      builder: (context, state) => const MyProfilePage(),
+    ),
+
     GoRoute(
       path: '/edit-profile',
       builder: (context, state) => const EditProfilePage(),
     ),
+
     GoRoute(
       path: '/scan-prescription',
       builder: (context, state) => const ScanPrescriptionScreen(),

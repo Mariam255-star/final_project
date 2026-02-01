@@ -1,6 +1,8 @@
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
+import 'package:final_project/core/widgets/custom_bottom_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PharmaScreen extends StatelessWidget {
   const PharmaScreen({super.key});
@@ -10,6 +12,7 @@ class PharmaScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
 
+      /// 🟢 BODY
       body: Column(
         children: [
           /// 🔹 TOP IMAGE (بدل AppBar)
@@ -26,9 +29,11 @@ class PharmaScreen extends StatelessWidget {
                 top: 45,
                 left: 16,
                 child: IconButton(
-                  icon: const Icon(Icons.arrow_back,
-                      color: AppColor.whiteColor),
-                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColor.whiteColor,
+                  ),
+                  onPressed: () => context.go('/home'),
                 ),
               ),
 
@@ -37,9 +42,7 @@ class PharmaScreen extends StatelessWidget {
                 left: 70,
                 child: Text(
                   'Pharma',
-                  style: TextStyles.titleMedium(
-                    color: AppColor.whiteColor,
-                  ),
+                  style: TextStyles.titleMedium(color: AppColor.whiteColor),
                 ),
               ),
             ],
@@ -73,15 +76,14 @@ class PharmaScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GridView.builder(
                 itemCount: 9,
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                 ),
                 itemBuilder: (context, index) {
                   return Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColor.secondaryColor,
                       shape: BoxShape.circle,
                     ),
@@ -97,32 +99,9 @@ class PharmaScreen extends StatelessWidget {
           ),
         ],
       ),
-        
-      /// 🔹 Bottom Navigation Bar (صور)
-      bottomNavigationBar: Container(
-        height: 70,
-        decoration: const BoxDecoration(
-          color: AppColor.primaryColor,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _navItem('assets/images/Home_Fill.png'),
-            _navItem('assets/images/Discover.png'),
-            _navItem('assets/images/Cart.png'),
-            _navItem('assets/images/Bell.png'),
-            _navItem('assets/images/Person.png'),
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget _navItem(String imagePath) {
-    return Image.asset(
-      imagePath,
-      width: 26,
-      height: 26,
+      /// 🟢 Bottom Navigation (موحد)
+      bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
     );
   }
 }

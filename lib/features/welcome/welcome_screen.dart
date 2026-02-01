@@ -2,7 +2,6 @@ import 'package:final_project/core/routes/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
-import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -28,14 +27,11 @@ class WelcomeScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 16),
-              
-            const SizedBox(height: 40),
+
+              const SizedBox(height: 40),
 
               /// 🔹 Welcome Text
-              Text(
-                "Welcome to MidLink",
-                style: TextStyles.titleMedium(),
-              ),
+              Text("Welcome to MidLink", style: TextStyles.titleMedium()),
 
               const SizedBox(height: 32),
 
@@ -54,9 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Register",
-                      style: TextStyles.button(
-                        color: AppColor.whiteColor,
-                      ),
+                      style: TextStyles.button(color: AppColor.whiteColor),
                     ),
                   ),
                 ),
@@ -79,9 +73,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Login",
-                      style: TextStyles.button(
-                        color: AppColor.whiteColor,
-                      ),
+                      style: TextStyles.button(color: AppColor.whiteColor),
                     ),
                   ),
                 ),

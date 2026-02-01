@@ -25,15 +25,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       if (_passwordController.text != _confirmPasswordController.text) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Passwords do not match")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
         return;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Password updated successfully")),
       );
+      context.go('/home');
     }
   }
 
@@ -112,10 +113,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                     const SizedBox(height: 24),
 
-                    Text(
-                      "Forget Password",
-                      style: TextStyles.titleMedium(),
-                    ),
+                    Text("Forget Password", style: TextStyles.titleMedium()),
 
                     const SizedBox(height: 32),
 
@@ -140,8 +138,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       obscure: _obscureConfirmPassword,
                       toggle: () {
                         setState(() {
-                          _obscureConfirmPassword =
-                              !_obscureConfirmPassword;
+                          _obscureConfirmPassword = !_obscureConfirmPassword;
                         });
                       },
                     ),
@@ -180,9 +177,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         onPressed: _submit,
                         child: Text(
                           "Login",
-                          style: TextStyles.button(
-                            color: AppColor.whiteColor,
-                          ),
+                          style: TextStyles.button(color: AppColor.whiteColor),
                         ),
                       ),
                     ),
@@ -220,11 +215,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyles.caption(color: Colors.grey),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
         ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         suffixIcon: IconButton(
           onPressed: toggle,
           icon: Icon(

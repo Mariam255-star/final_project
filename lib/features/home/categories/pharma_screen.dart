@@ -101,7 +101,7 @@ class PharmaScreen extends StatelessWidget {
       ),
 
       /// 🟢 Bottom Navigation (موحد)
-      bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
+      // bottomNavigationBar: const CustomBottomNav(currentIndex: 1),
     );
   }
 }

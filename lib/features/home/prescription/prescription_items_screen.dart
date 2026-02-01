@@ -48,7 +48,7 @@ class PrescriptionItemsScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  context.go('/product-details');
+                  context.push('/product-details');
                 },
                 child: Container(
                   decoration: BoxDecoration(

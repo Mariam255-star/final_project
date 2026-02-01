@@ -1,4 +1,3 @@
-import 'package:final_project/core/shared/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_color.dart';
@@ -9,34 +8,31 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      currentIndex: 3, // 🔔 Notifications
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: AppColor.whiteColor,
+
+      /// 🟢 AppBar
+      appBar: AppBar(
         backgroundColor: AppColor.whiteColor,
-
-        /// 🟢 AppBar
-        appBar: AppBar(
-          backgroundColor: AppColor.whiteColor,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => context.go('/home'),
-          ),
-          title: Text(
-            'Notification',
-            style: TextStyles.subtitle(color: Colors.black),
-          ),
-          centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => context.go('/home'),
         ),
-
-        /// 🟢 Body
-        body: ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return _notificationCard();
-          },
+        title: Text(
+          'Notification',
+          style: TextStyles.subtitle(color: Colors.black),
         ),
+        centerTitle: true,
+      ),
+
+      /// 🟢 Body
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return _notificationCard();
+        },
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:final_project/core/shared/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/core/constants/app_color.dart';
 import 'package:final_project/core/utils/text_style.dart';
@@ -18,124 +17,116 @@ class HairCareScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      currentIndex: 1, // 🔍 Discover / Category
-      child: Scaffold(
-        backgroundColor: AppColor.whiteColor,
-        body: Column(
-          children: [
-            /// 🟢 Header
-            Stack(
-              children: [
-                Image.asset(
-                  'assets/images/navbar.png',
-                  width: double.infinity,
-                  height: 140,
-                  fit: BoxFit.cover,
+    return Scaffold(
+      backgroundColor: AppColor.whiteColor,
+      body: Column(
+        children: [
+          /// 🟢 Header
+          Stack(
+            children: [
+              Image.asset(
+                'assets/images/navbar.png',
+                width: double.infinity,
+                height: 140,
+                fit: BoxFit.cover,
+              ),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () => context.go('/home'),
+                      ),
+                      Text(
+                        'Hair Care',
+                        style: TextStyles.subtitle(color: AppColor.whiteColor),
+                      ),
+                      InkWell(
+                        onTap: () => context.go('/notifications'),
+                        child: const Icon(
+                          Icons.notifications_none,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
+              ),
+            ],
+          ),
+
+          /// 🟢 Content
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  /// 🔍 Search
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: TextStyles.caption(color: Colors.grey),
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: const Icon(Icons.filter_list),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  /// 🏷 Filters
+                  SizedBox(
+                    height: 40,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          ),
-                          onPressed: () => context.go('/home'),
-                        ),
-                        Text(
-                          'Hair Care',
-                          style: TextStyles.subtitle(
-                            color: AppColor.whiteColor,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => context.go('/notifications'),
-                          child: const Icon(
-                            Icons.notifications_none,
-                            color: Colors.white,
-                          ),
-                        ),
+                        _chip('All', true),
+                        _chip('Shampoo', false),
+                        _chip('Hair mask', false),
+                        _chip('Balsam', false),
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
 
-            /// 🟢 Content
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    /// 🔍 Search
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: TextStyles.caption(color: Colors.grey),
-                        prefixIcon: const Icon(Icons.search),
-                        suffixIcon: const Icon(Icons.filter_list),
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                  const SizedBox(height: 16),
+
+                  /// 📦 Products Grid
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: productImages.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.7,
+                          ),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.push('/product-details');
+                          },
+                          child: _productGridItem(productImages[index]),
+                        );
+                      },
                     ),
-
-                    const SizedBox(height: 12),
-
-                    /// 🏷 Filters
-                    SizedBox(
-                      height: 40,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          _chip('All', true),
-                          _chip('Shampoo', false),
-                          _chip('Hair mask', false),
-                          _chip('Balsam', false),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    /// 📦 Products Grid
-                    Expanded(
-                      child: GridView.builder(
-                        itemCount: productImages.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12,
-                              childAspectRatio: 0.7,
-                            ),
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              context.go('/product-details');
-                            },
-                            child: _productGridItem(productImages[index]),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

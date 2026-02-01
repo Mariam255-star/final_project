@@ -5,10 +5,7 @@ import '../../core/constants/app_color.dart';
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
 
-  const CustomBottomNav({
-    super.key,
-    required this.currentIndex,
-  });
+  const CustomBottomNav({super.key, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class CustomBottomNav extends StatelessWidget {
             context.go('/home');
             break;
           case 1:
-              context.go('/our-pharm');
+            context.go('/address');
             break;
           case 2:
             context.go('/cart');
@@ -41,33 +38,23 @@ class CustomBottomNav extends StatelessWidget {
       },
       items: const [
         BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage('assets/images/Home_Fill.png'),
-          ),
+          icon: ImageIcon(AssetImage('assets/images/Home_Fill.png')),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage('assets/images/Discover.png'),
-          ),
+          icon: ImageIcon(AssetImage('assets/images/Discover.png')),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage('assets/images/Cart.png'),
-          ),
+          icon: ImageIcon(AssetImage('assets/images/Cart.png')),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage('assets/images/Bell.png'),
-          ),
+          icon: ImageIcon(AssetImage('assets/images/Bell.png')),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(
-            AssetImage('assets/images/Person.png'),
-          ),
+          icon: ImageIcon(AssetImage('assets/images/Person.png')),
           label: '',
         ),
       ],

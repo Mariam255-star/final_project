@@ -1,4 +1,3 @@
-import 'package:final_project/core/shared/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_color.dart';
@@ -18,28 +17,27 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      currentIndex: 2, // 🟢 عدلي الرقم حسب ترتيب bottom nav عندك
-      child: Scaffold(
-        backgroundColor: AppColor.whiteColor,
+    return Scaffold(
+      backgroundColor: AppColor.whiteColor,
 
-        /// 🟢 AppBar
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => context.pop(),
-          ),
-          title: Text(
-            'Payment Method',
-            style: TextStyles.subtitle(color: Colors.black),
-          ),
-          centerTitle: true,
+      /// 🟢 AppBar
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => context.go('/cart'),
         ),
+        title: Text(
+          'Payment Method',
+          style: TextStyles.subtitle(color: Colors.black),
+        ),
+        centerTitle: true,
+      ),
 
-        /// 🟢 Body
-        body: Padding(
+      /// 🟢 Body
+      body: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
@@ -69,10 +67,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               const SizedBox(height: 22),
               _summary(),
 
-              const Spacer(),
+              const SizedBox(height: 20),
 
               GestureDetector(
-                onTap: () => context.push('/order-review'),
+                onTap: () => context.go('/order-review'),
                 child: _primaryButton('Continue'),
               ),
             ],
@@ -166,10 +164,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         CheckboxListTile(
           value: true,
           onChanged: (_) {},
-          title: Text(
-            'Save card details',
-            style: TextStyles.caption(),
-          ),
+          title: Text('Save card details', style: TextStyles.caption()),
           activeColor: AppColor.primaryColor,
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
@@ -227,35 +222,27 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
-        child: Text(
-          title,
-          style: TextStyles.button(color: Colors.white),
-        ),
+        child: Text(title, style: TextStyles.button(color: Colors.white)),
       ),
     );
   }
 
   Widget _doneCircle() => const CircleAvatar(
-        radius: 14,
-        backgroundColor: Colors.green,
-        child: Icon(Icons.check, size: 14, color: Colors.white),
-      );
+    radius: 14,
+    backgroundColor: Colors.green,
+    child: Icon(Icons.check, size: 14, color: Colors.white),
+  );
 
   Widget _activeCircle(String text) => CircleAvatar(
-        radius: 14,
-        backgroundColor: AppColor.primaryColor,
-        child: Text(text, style: const TextStyle(color: Colors.white)),
-      );
+    radius: 14,
+    backgroundColor: AppColor.primaryColor,
+    child: Text(text, style: const TextStyle(color: Colors.white)),
+  );
 
-  Widget _inactiveCircle(String text) => CircleAvatar(
-        radius: 14,
-        backgroundColor: Colors.grey,
-        child: Text(text),
-      );
+  Widget _inactiveCircle(String text) =>
+      CircleAvatar(radius: 14, backgroundColor: Colors.grey, child: Text(text));
 
-  Widget _line() => Expanded(
-        child: Container(height: 1.2, color: Colors.grey),
-      );
+  Widget _line() => Expanded(child: Container(height: 1.2, color: Colors.grey));
 }
 
 // ================= Summary Row =================
